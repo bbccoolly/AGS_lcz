@@ -2,7 +2,9 @@ package com.ags.lcz.core.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.ags.lcz.core.database.entity.UserInfoEntity
+import androidx.room.TypeConverters
+import com.ags.lcz.core.database.entity.PokemonEntity
+import com.ags.lcz.core.database.entity.PokemonInfoEntity
 
 /**
  *
@@ -10,8 +12,14 @@ import com.ags.lcz.core.database.entity.UserInfoEntity
  *
  * create by lcz on 2023-03-02
  */
-@Database(entities = [UserInfoEntity::class], version = 1)
+@Database(
+    entities = [PokemonEntity::class, PokemonInfoEntity::class],
+    version = 2,
+    exportSchema = false
+)
+@TypeConverters(value = [TypeResponseConverter::class])
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao():UserInfoDao
+    abstract fun pokemonDao(): PokemonDao
+    abstract fun pokemonInfoDao(): PokemonInfoDao
 
 }

@@ -1,13 +1,16 @@
 package com.ags.lcz.core.database.di
 
-import android.content.Context
+import android.app.Application
 import androidx.room.Room
 import com.ags.lcz.core.database.AppDatabase
-import com.ags.lcz.core.database.UserInfoDao
+import com.ags.lcz.core.database.TypeResponseConverter
+import com.ags.lcz.core.database.PokemonDao
+import com.ags.lcz.core.database.PokemonInfoDao
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -19,17 +22,43 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+internal object DatabaseModule {
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
+            .build()
+    }
+
 
     @Provides
-    fun provideUserInfoDao(appDatabase: AppDatabase): UserInfoDao {
-        return appDatabase.userDao()
+    fun providePokemonDao(appDatabase: AppDatabase): PokemonDao {
+        return appDatabase.pokemonDao()
+    }
+
+    @Provides
+    fun providePokemonInfoDao(appDatabase: AppDatabase): PokemonInfoDao {
+        return appDatabase.pokemonInfoDao()
     }
 
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
-        return Room.databaseBuilder(appContext, AppDatabase::class.java, "lczRoomTable").build()
+    fun provideAppDatabase(
+        application: Application,
+        typeResponseConverter: TypeResponseConverter
+    ): AppDatabase {
+        return Room
+            .databaseBuilder(application, AppDatabase::class.java, "lczRoom.db")
+            .fallbackToDestructiveMigration()
+            .addTypeConverter(typeResponseConverter)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideTypeResponseConverter(moshi: Moshi): TypeResponseConverter {
+        return TypeResponseConverter(moshi)
     }
 }
