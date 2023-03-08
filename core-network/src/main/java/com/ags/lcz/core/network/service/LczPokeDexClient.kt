@@ -12,12 +12,21 @@ import javax.inject.Inject
  *
  * create by lcz on 2023-03-03
  */
-class LczPokeDexClient @Inject constructor(private val lczApiService: LczApiService) {
-    suspend fun fetchPokemonList(page: Int): ApiResponse<PokemonResponse> =
+class LczPokeDexClient @Inject constructor(
+    private val lczApiService: LczApiService
+) {
+
+    suspend fun fetchPokemonList(
+        page: Int
+    ): ApiResponse<PokemonResponse> =
         lczApiService.fetchPokemonList(limit = PAGE_SIZE, offset = page * PAGING_SIZE)
 
-    suspend fun fetchPokemonInfo(name: String): ApiResponse<PokemonInfo> =
+
+    suspend fun fetchPokemonInfo(
+        name: String
+    ): ApiResponse<PokemonInfo> =
         lczApiService.fetchPokemonInfo(name = name)
+
 
     companion object {
         private const val PAGING_SIZE = 20

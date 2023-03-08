@@ -11,24 +11,24 @@ android {
     defaultConfig {
         minSdk 28
         targetSdk 33
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+//
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//        consumerProguardFiles "consumer-rules.pro"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+//    kotlinOptions {
+//        jvmTarget = '1.8'
+//    }
 }
 
 dependencies {
@@ -43,6 +43,9 @@ dependencies {
     // json parsing
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
     implementation 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.2'
 
     // logger
     api 'com.jakewharton.timber:timber:5.0.1'

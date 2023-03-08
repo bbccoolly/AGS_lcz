@@ -39,13 +39,14 @@ android {
 //    composeOptions {
 //        kotlinCompilerExtensionVersion Versions.compose
 //    }
-//    buildFeatures {
+    buildFeatures {
+        dataBinding true
 //        compose = true
 //        aidl = false
 //        buildConfig = false
 //        renderScript = false
 //        shaders = false
-//    }
+    }
 }
 
 dependencies {
@@ -69,7 +70,7 @@ dependencies {
 
 
     // data binding
-//    implementation "comxndroid:xxx"
+    implementation "com.github.skydoves:bindables:1.1.0"
 
 
     // di
@@ -91,11 +92,11 @@ dependencies {
 //    implementation "com.github.skydoves:bundler:1.0.4"
 
     // transformation animation 转换运动使用变形动画转换为不同的视图或活动
-//    implementation("com.github.skydoves:transformationlayout:1.1.1")
+    implementation("com.github.skydoves:transformationlayout:1.1.1")
 
     // recyclerView
 //    implementation 'androidx.recyclerview:recyclerview:1.2.1.'
-//    implementation "com.github.skydoves:baserecyclerviewadapter:1.0.4"
+    implementation "com.github.skydoves:baserecyclerviewadapter:1.0.4"
 
     // custom views
     // 用于应用渐变、阴影和着色
