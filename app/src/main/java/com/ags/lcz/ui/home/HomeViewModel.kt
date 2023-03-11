@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor() : BindingViewModel() {
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is HomeViewModel Fragment"
     }

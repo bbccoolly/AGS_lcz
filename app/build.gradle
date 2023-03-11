@@ -119,6 +119,8 @@ dependencies {
     // 一个精美且灵活的 ProgressView，可完全自定义动画
 //    implementation "com.github.skydoves:progressview:1.1.3"
 
+    //banner
+    implementation 'com.github.zhpanvip:bannerviewpager:3.5.11'
 
     //test
     testImplementation 'junit:junit:4.13.2'
