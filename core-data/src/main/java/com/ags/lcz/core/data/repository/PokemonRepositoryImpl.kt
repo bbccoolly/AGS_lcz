@@ -1,11 +1,9 @@
 ﻿package com.ags.lcz.core.data.repository
 
 import com.ags.lcz.core.database.PokemonDao
-import com.ags.lcz.core.database.entity.mapper.asDomain
-import com.ags.lcz.core.database.entity.mapper.asEntity
 import com.ags.lcz.core.network.Dispatcher
 import com.ags.lcz.core.network.LczAppDispatchers
-import com.ags.lcz.core.network.service.LczPokeDexClient
+import com.ags.lcz.core.network.service.PokemonDexClient
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.suspendOnSuccess
@@ -23,12 +21,12 @@ import javax.inject.Inject
  *
  * create by lcz on 2023-03-06
  */
-class MainRepositoryImpl @Inject constructor(
-    private val pokeDexClient: LczPokeDexClient,
+class PokemonRepositoryImpl @Inject constructor(
+    private val pokeDexClient: PokemonDexClient,
     private val pokemonDao: PokemonDao,
     @Dispatcher(LczAppDispatchers.IO) private val ioDispatchers: CoroutineDispatcher
 
-):MainRepository {
+):PokemonRepository {
     override fun fetchPokemonList(
         page: Int,
         onStart: () -> Unit,

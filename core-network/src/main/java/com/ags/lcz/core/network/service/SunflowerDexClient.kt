@@ -10,7 +10,7 @@ import javax.inject.Inject
  *
  * create by lcz on 2023-03-08
  */
-class SunflowerApiDexClient @Inject constructor(
+class SunflowerDexClient @Inject constructor(
     private val sunflowerApiService: SunflowerApiService
 ) {
     suspend fun fetchSunflowerPhotos(

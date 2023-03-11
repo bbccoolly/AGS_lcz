@@ -1,11 +1,10 @@
 package com.ags.lcz.core.data.repository
 
-import androidx.annotation.WorkerThread
-import com.ags.lcz.core.model.sunflower.SunflowerPhotosEntity
 import com.ags.lcz.core.network.Dispatcher
 import com.ags.lcz.core.network.LczAppDispatchers
-import com.ags.lcz.core.network.service.SunflowerApiDexClient
+import com.ags.lcz.core.network.service.PlayAndroidDexClient
 import com.skydoves.sandwich.message
+import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,36 +12,29 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
  *
  * desc: TODO
  *
- * create by lcz on 2023-03-08
+ * create by lcz on 2023-03-11
  */
-class SunFlowerPhotosRepositoryImpl @Inject constructor(
-    private val sunflowerApiDexClient: SunflowerApiDexClient,
+class PlayAndroidRepositoryIml @Inject constructor(
+    private val playAndroidDexClient: PlayAndroidDexClient,
     @Dispatcher(LczAppDispatchers.IO) private val ioDispatcher: CoroutineDispatcher
-
-) : SunFlowerPhotosRepository {
-
-    @WorkerThread
-    override fun fetchSunFlowerPhotosInfo(
-        searchKey: String,
+) : PlayAndroidRepository {
+    override fun getHomeBannerInfo(
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ) = flow {
-        var photosEntityList: List<SunflowerPhotosEntity>
-        val response = sunflowerApiDexClient.fetchSunflowerPhotos(searchKey = searchKey)
+        val response = playAndroidDexClient.getHomeBannerInfo()
         response.suspendOnSuccess {
-            photosEntityList = data.results
-            emit(photosEntityList)
+            emit(data.data)
         }.onFailure {
-            onError(message())
+            onError { message() }
         }
-    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
-
-
+    }.onStart { onStart() }.onCompletion { onComplete }.flowOn(ioDispatcher)
 }

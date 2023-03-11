@@ -1,12 +1,10 @@
 ﻿package com.ags.lcz.ui
 
 import androidx.annotation.MainThread
-import androidx.annotation.WorkerThread
 import androidx.databinding.Bindable
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ags.lcz.core.data.repository.MainRepository
-import com.ags.lcz.core.data.repository.SunFlowerPhotosRepository
+import com.ags.lcz.core.data.repository.PokemonRepository
+import com.ags.lcz.core.data.repository.SunFlowerRepository
 import com.ags.lcz.core.model.Pokemon
 import com.skydoves.bindables.BindingViewModel
 import com.skydoves.bindables.asBindingProperty
@@ -25,8 +23,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val mainRepository: MainRepository,
-    private val sunFlowerPhotosRepository: SunFlowerPhotosRepository
+    private val pokemonRepository: PokemonRepository,
+    private val sunFlowerRepository: SunFlowerRepository
 ) : BindingViewModel() {
 
     @get:Bindable
@@ -39,7 +37,7 @@ class MainViewModel @Inject constructor(
 
     private val sunflowerFetchSearchKey: MutableStateFlow<Int> = MutableStateFlow(0)
     private val sunflowerListFlow = sunflowerFetchSearchKey.flatMapLatest {
-        sunFlowerPhotosRepository.fetchSunFlowerPhotosInfo(
+        sunFlowerRepository.fetchSunFlowerPhotosInfo(
             searchKey = "风景",
             onStart = { toastMessage = "1" },
             onComplete = { toastMessage = "2" },
@@ -49,7 +47,7 @@ class MainViewModel @Inject constructor(
 
     private val pokemonFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     private val pokemonListFlow = pokemonFetchingIndex.flatMapLatest { page ->
-        mainRepository.fetchPokemonList(
+        pokemonRepository.fetchPokemonList(
             page = page,
             onStart = { isLoading = true },
             onComplete = { isLoading = false },

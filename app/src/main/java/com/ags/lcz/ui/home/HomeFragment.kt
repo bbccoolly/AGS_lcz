@@ -11,6 +11,7 @@ import com.ags.lcz.binding.ViewBinding
 import com.ags.lcz.databinding.FragmentHomeBinding
 import com.ags.lcz.util.ColorTypeUtils
 import com.skydoves.bindables.BindingFragment
+import com.skydoves.whatif.whatIfNotNull
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -20,10 +21,6 @@ import java.util.ArrayList
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
-
-
-    private var mDrawableList: MutableList<Int> = ArrayList()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -36,11 +33,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
         }.root
     }
 
+
     private fun initBannerData() {
-        mDrawableList.clear()
-        for (i in 0..4) {
-            val drawable = resources.getIdentifier("advertise$i", "drawable", context?.packageName)
-            mDrawableList.add(drawable)
+        viewModel.bannerInfo.observe(viewLifecycleOwner) {
+            Timber.d("observe - "+it.size)
+            binding.bannerViewPager.create(it)
         }
     }
 
@@ -60,7 +57,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
             )
             setOnPageClickListener({ _: View, position: Int -> itemClick(position) }, true)
             setInterval(5000)
-        }.create(mDrawableList)
+        }
 
     }
 

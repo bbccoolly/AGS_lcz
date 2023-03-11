@@ -3,6 +3,7 @@ package com.ags.lcz.adapter
 import android.view.View
 import android.view.ViewGroup
 import com.ags.lcz.R
+import com.ags.lcz.core.model.playandroid.HomeBannerEntity
 import com.ags.lcz.databinding.ItemBannerViewpagerBinding
 import com.zhpan.bannerview.BaseBannerAdapter
 import com.zhpan.bannerview.BaseViewHolder
@@ -13,17 +14,18 @@ import com.zhpan.bannerview.BaseViewHolder
  *
  * create by lcz on 2023-03-11
  */
-class BannerAdapter(private val mRoundCorner: Int) : BaseBannerAdapter<Int>() {
+class BannerAdapter(private val mRoundCorner: Int) : BaseBannerAdapter<HomeBannerEntity>() {
 
     override fun createViewHolder(
         parent: ViewGroup, itemView: View, viewType: Int
-    ): BaseViewHolder<Int> {
+    ): BaseViewHolder<HomeBannerEntity> {
         return ViewBindingViewHolder(ItemBannerViewpagerBinding.bind(itemView))
     }
 
-    override fun bindData(holder: BaseViewHolder<Int>, data: Int, position: Int, pageSize: Int) {
+    override fun bindData(holder: BaseViewHolder<HomeBannerEntity>, data: HomeBannerEntity, position: Int, pageSize: Int) {
         if (holder is ViewBindingViewHolder) {
-            holder.viewBinding.ivBanner.setImageResource(data)
+//            holder.viewBinding.ivBanner.setImageResource(data)
+            holder.viewBinding.imageUrl = data.imagePath
             holder.viewBinding.ivBanner.setRoundCorner(mRoundCorner)
         }
     }
@@ -35,4 +37,4 @@ class BannerAdapter(private val mRoundCorner: Int) : BaseBannerAdapter<Int>() {
 }
 
 internal class ViewBindingViewHolder(var viewBinding: ItemBannerViewpagerBinding) :
-    BaseViewHolder<Int>(viewBinding.root)
+    BaseViewHolder<HomeBannerEntity>(viewBinding.root)

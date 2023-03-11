@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
  *
  * create by lcz on 2023-03-08
  */
-interface SunFlowerPhotosRepository {
+interface SunFlowerRepository {
 
     @WorkerThread
     fun fetchSunFlowerPhotosInfo(

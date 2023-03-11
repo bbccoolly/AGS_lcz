@@ -41,6 +41,13 @@ object ViewBinding {
   }
 
   @JvmStatic
+  @BindingAdapter("paletteImage")
+  fun bindLoadImagePalette(view: AppCompatImageView, url: String) {
+    Glide.with(view.context)
+      .load(url).into(view)
+  }
+
+  @JvmStatic
   @BindingAdapter("paletteImage", "paletteCard")
   fun bindLoadImagePalette(view: AppCompatImageView, url: String, paletteCard: MaterialCardView) {
     Glide.with(view.context)

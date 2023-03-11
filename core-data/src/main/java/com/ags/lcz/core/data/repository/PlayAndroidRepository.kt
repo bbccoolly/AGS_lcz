@@ -1,7 +1,7 @@
 ﻿package com.ags.lcz.core.data.repository
 
 import androidx.annotation.WorkerThread
-import com.ags.lcz.core.model.Pokemon
+import com.ags.lcz.core.model.playandroid.HomeBannerEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,12 +10,11 @@ import kotlinx.coroutines.flow.Flow
  *
  * create by lcz on 2023-03-06
  */
-interface MainRepository {
+interface PlayAndroidRepository {
     @WorkerThread
-    fun fetchPokemonList(
-        page: Int,
+    fun getHomeBannerInfo(
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (String?) -> Unit
-    ): Flow<List<Pokemon>>
+    ): Flow<List<HomeBannerEntity>>
 }

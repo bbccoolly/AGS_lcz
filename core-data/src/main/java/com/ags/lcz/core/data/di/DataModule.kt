@@ -1,9 +1,6 @@
 ﻿package com.ags.lcz.core.data.di
 
-import com.ags.lcz.core.data.repository.MainRepository
-import com.ags.lcz.core.data.repository.MainRepositoryImpl
-import com.ags.lcz.core.data.repository.SunFlowerPhotosRepository
-import com.ags.lcz.core.data.repository.SunFlowerPhotosRepositoryImpl
+import com.ags.lcz.core.data.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,8 +16,11 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 interface DataModule {
     @Binds
-    fun bindsMainRepository(mainRepositoryImpl: MainRepositoryImpl): MainRepository
+    fun bindsMainRepository(mainRepositoryImpl: PokemonRepositoryImpl): PokemonRepository
 
     @Binds
-    fun bindsSunFlowerRepository(sunFlowerPhotosRepositoryImpl: SunFlowerPhotosRepositoryImpl): SunFlowerPhotosRepository
+    fun bindsSunFlowerRepository(sunFlowerRepositoryImpl: SunFlowerRepositoryImpl): SunFlowerRepository
+
+    @Binds
+    fun bindPlayAndroidRepository(playAndroidRepositoryIml: PlayAndroidRepositoryIml): PlayAndroidRepository
 }

@@ -13,7 +13,7 @@ import retrofit2.http.Query
  *
  * create by lcz on 2023-03-02
  */
-interface LczApiService {
+interface PokemonApiService {
     @GET("pokemon")
     suspend fun fetchPokemonList(
         @Query("limit") limit: Int = 20,
