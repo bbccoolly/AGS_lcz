@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.ags.lcz.R
 import com.ags.lcz.adapter.BannerAdapter
+import com.ags.lcz.adapter.HomeFragmentAdapter
 import com.ags.lcz.binding.ViewBinding
+import com.ags.lcz.core.model.playandroid.TabEntity
 import com.ags.lcz.databinding.FragmentHomeBinding
 import com.ags.lcz.util.ColorTypeUtils
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.bindables.BindingFragment
 import com.skydoves.whatif.whatIfNotNull
 import com.zhpan.indicator.enums.IndicatorSlideMode
@@ -22,48 +26,35 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
 
     private val viewModel: HomeViewModel by viewModels()
 
+    private lateinit var fragmentAdapter: HomeFragmentAdapter
+    private val fragmentList = listOf(
+        TabEntity(HomeFragmentAdapter.TAB_HOME_HOME),
+        TabEntity(HomeFragmentAdapter.TAB_HOME_SQUARE),
+        TabEntity(HomeFragmentAdapter.TAB_HOME_QA)
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        initBannerData()
-        initViewPager()
         return binding {
             vm = viewModel
         }.root
     }
 
-
-    private fun initBannerData() {
-        viewModel.bannerInfo.observe(viewLifecycleOwner) {
-            Timber.d("observe - "+it.size)
-            binding.bannerViewPager.create(it)
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        fragmentAdapter = HomeFragmentAdapter(fragmentList, this.childFragmentManager, lifecycle)
+        binding.homeViewPager2.adapter = fragmentAdapter
+        TabLayoutMediator(
+            binding.tabLayout,
+            binding.homeViewPager2
+        ) { tab: TabLayout.Tab, position: Int ->
+            tab.text = fragmentAdapter.item[position].title
+        }.apply(TabLayoutMediator::attach)
     }
 
-    private fun initViewPager() {
-        val bannerAdapter = BannerAdapter(resources.getDimensionPixelOffset(R.dimen.dp_8))
-        binding.bannerViewPager.apply {
-            registerLifecycleObserver(lifecycle)
-            setAdapter(bannerAdapter)
-            setIndicatorSlideMode(IndicatorSlideMode.SCALE)
-            setIndicatorSliderColor(
-                resources.getColor(R.color.md_orange_200, null),
-                resources.getColor(R.color.md_yellow_100, null)
-            )
-            setIndicatorSliderRadius(
-                resources.getDimensionPixelOffset(R.dimen.dp_4),
-                resources.getDimensionPixelOffset(R.dimen.dp_5)
-            )
-            setOnPageClickListener({ _: View, position: Int -> itemClick(position) }, true)
-            setInterval(5000)
-        }
-
+    companion object {
+        const val KEY_CHILD_HOME_TAB_PARCELABLE = "key_child_tab_parcelable"
     }
-
-    private fun itemClick(position: Int) {
-        ViewBinding.bindToast(binding.bannerViewPager, "点击了 $position")
-    }
-
 
 }

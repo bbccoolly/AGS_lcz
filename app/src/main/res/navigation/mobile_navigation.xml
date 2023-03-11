@@ -31,4 +31,19 @@
         android:name="com.ags.lcz.ui.mine.MineFragment"
         android:label="@string/title_nav_mine"
         tools:layout="@layout/fragment_mine" />
+    <fragment
+        android:id="@+id/homeChildFragment"
+        android:name="com.ags.lcz.ui.home_child.HomeChildFragment"
+        android:label="fragment_home_child"
+        tools:layout="@layout/fragment_home_child" />
+    <fragment
+        android:id="@+id/homeSquareFragment"
+        android:name="com.ags.lcz.ui.home_square.HomeSquareFragment"
+        android:label="fragment_home_square"
+        tools:layout="@layout/fragment_home_square" />
+    <fragment
+        android:id="@+id/homeQAFragment"
+        android:name="com.ags.lcz.ui.home_qa.HomeQAFragment"
+        android:label="fragment_home_q_a"
+        tools:layout="@layout/fragment_home_q_a" />
 </navigation>
