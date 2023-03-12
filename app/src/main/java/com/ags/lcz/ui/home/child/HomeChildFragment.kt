@@ -1,4 +1,4 @@
-package com.ags.lcz.ui.home_child
+package com.ags.lcz.ui.home.child
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.ags.lcz.R
 import com.ags.lcz.adapter.BannerAdapter
+import com.ags.lcz.adapter.HomeArticleAdapter
 import com.ags.lcz.binding.ViewBinding
 import com.ags.lcz.core.model.playandroid.TabEntity
 import com.ags.lcz.databinding.FragmentHomeChildBinding
 import com.ags.lcz.ui.home.HomeFragment
 import com.skydoves.bindables.BindingFragment
+import com.skydoves.transformationlayout.onTransformationStartContainer
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -36,14 +38,20 @@ class HomeChildFragment : BindingFragment<FragmentHomeChildBinding>(R.layout.fra
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        onTransformationStartContainer()
         super.onCreateView(inflater, container, savedInstanceState)
         initBannerData()
         initViewPager()
+        initRecycleView()
         return binding {
+            binding.adapter = HomeArticleAdapter()
             vm = viewModel
         }.root
     }
 
+    private fun initRecycleView() {
+
+    }
 
     private fun initBannerData() {
         viewModel.bannerInfo.observe(viewLifecycleOwner) {

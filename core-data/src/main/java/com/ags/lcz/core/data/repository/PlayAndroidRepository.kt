@@ -1,6 +1,8 @@
 ﻿package com.ags.lcz.core.data.repository
 
 import androidx.annotation.WorkerThread
+import com.ags.lcz.core.model.playandroid.ArticleDetailEntity
+import com.ags.lcz.core.model.playandroid.HomeArticleEntity
 import com.ags.lcz.core.model.playandroid.HomeBannerEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +19,13 @@ interface PlayAndroidRepository {
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ): Flow<List<HomeBannerEntity>>
+
+    @WorkerThread
+    fun getHomeArticleList(
+        pageNo: Int,
+        pageSize: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<HomeArticleEntity>
 }

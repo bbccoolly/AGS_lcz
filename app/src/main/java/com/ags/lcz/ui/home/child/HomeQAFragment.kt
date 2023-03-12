@@ -1,4 +1,4 @@
-package com.ags.lcz.ui.home_qa
+package com.ags.lcz.ui.home.child
 
 import android.os.Bundle
 import android.view.LayoutInflater

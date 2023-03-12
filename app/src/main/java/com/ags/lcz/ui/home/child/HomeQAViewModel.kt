@@ -1,4 +1,4 @@
-package com.ags.lcz.ui.home_square
+package com.ags.lcz.ui.home.child
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,10 +7,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeSquareViewModel  @Inject constructor() : BindingViewModel() {
+class HomeQAViewModel @Inject constructor()  : BindingViewModel() {
     private val _message = MutableLiveData<String>().apply {
-        value = "This is 广场 Fragment"
+        value = "This is 问答 Fragment"
     }
 
     val message: LiveData<String> = _message
+
 }

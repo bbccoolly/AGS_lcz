@@ -6,13 +6,13 @@
     <data>
 <variable
     name="vm"
-    type="com.ags.lcz.ui.home_square.HomeSquareViewModel" />
+    type="com.ags.lcz.ui.home.child.HomeSquareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home_square.HomeSquareFragment">
+        tools:context=".ui.home.child.HomeSquareFragment">
 
         <TextView
             android:id="@+id/textView"

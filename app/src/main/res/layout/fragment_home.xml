@@ -28,6 +28,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="center"
+                app:tabIndicatorFullWidth="false"
                 app:tabMode="scrollable"
                 app:tabTextAppearance="@style/TabLayout.TextAppearance"
                 app:tabTextColor="?colorPrimary" />

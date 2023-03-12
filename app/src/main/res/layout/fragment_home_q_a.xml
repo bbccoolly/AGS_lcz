@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="com.ags.lcz.ui.home_qa.HomeQAViewModel" />
+            type="com.ags.lcz.ui.home.child.HomeQAViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home_qa.HomeQAFragment">
+        tools:context=".ui.home.child.HomeQAFragment">
 
         <TextView
             android:id="@+id/textView"

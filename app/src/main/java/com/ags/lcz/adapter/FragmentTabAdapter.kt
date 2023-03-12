@@ -5,9 +5,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ags.lcz.core.model.playandroid.TabEntity
-import com.ags.lcz.ui.home_child.HomeChildFragment
-import com.ags.lcz.ui.home_qa.HomeQAFragment
-import com.ags.lcz.ui.home_square.HomeSquareFragment
+import com.ags.lcz.ui.home.child.HomeChildFragment
+import com.ags.lcz.ui.home.child.HomeQAFragment
+import com.ags.lcz.ui.home.child.HomeSquareFragment
 
 /**
  *
@@ -15,7 +15,7 @@ import com.ags.lcz.ui.home_square.HomeSquareFragment
  *
  * create by lcz on 2023-03-12
  */
-class HomeFragmentAdapter(
+class FragmentTabAdapter(
     var item: List<TabEntity>,
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
@@ -35,7 +35,7 @@ class HomeFragmentAdapter(
 
     companion object {
         const val TAB_HOME_HOME = "首页"
-        const val TAB_HOME_SQUARE = "广场"
+        const val TAB_HOME_SQUARE = "天安门广场"
         const val TAB_HOME_QA = "问答"
     }
 }

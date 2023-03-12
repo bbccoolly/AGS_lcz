@@ -4,15 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
-            type="com.ags.lcz.ui.home_child.HomeChildViewModel" />
+            type="com.ags.lcz.ui.home.child.HomeChildViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.ags.lcz.adapter.HomeArticleAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home_child.HomeChildFragment">
+        tools:context=".ui.home.child.HomeChildFragment">
 
         <com.zhpan.bannerview.BannerViewPager
             android:id="@+id/bannerViewPager"
@@ -23,15 +28,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{vm.message}"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fadeScrollbars="false"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbVertical="@drawable/scrollbar"
+            android:scrollbars="vertical"
+            app:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bannerViewPager" />
+            app:layout_constraintTop_toBottomOf="@+id/bannerViewPager"
+            app:paginationArticleList="@{vm}"
+            app:submitList="@{vm.homeArticleList.datas}"
+            app:toast="@{vm.toastMessage}"
+            tools:listitem="@layout/item_recyclerview_play_android" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

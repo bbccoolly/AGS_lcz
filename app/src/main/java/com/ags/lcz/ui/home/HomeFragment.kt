@@ -6,31 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.ags.lcz.R
-import com.ags.lcz.adapter.BannerAdapter
-import com.ags.lcz.adapter.HomeFragmentAdapter
-import com.ags.lcz.binding.ViewBinding
+import com.ags.lcz.adapter.FragmentTabAdapter
 import com.ags.lcz.core.model.playandroid.TabEntity
 import com.ags.lcz.databinding.FragmentHomeBinding
-import com.ags.lcz.util.ColorTypeUtils
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.bindables.BindingFragment
-import com.skydoves.whatif.whatIfNotNull
-import com.zhpan.indicator.enums.IndicatorSlideMode
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-import java.util.ArrayList
 
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private lateinit var fragmentAdapter: HomeFragmentAdapter
+    private lateinit var fragmentAdapter: FragmentTabAdapter
     private val fragmentList = listOf(
-        TabEntity(HomeFragmentAdapter.TAB_HOME_HOME),
-        TabEntity(HomeFragmentAdapter.TAB_HOME_SQUARE),
-        TabEntity(HomeFragmentAdapter.TAB_HOME_QA)
+        TabEntity(FragmentTabAdapter.TAB_HOME_HOME),
+        TabEntity(FragmentTabAdapter.TAB_HOME_SQUARE),
+        TabEntity(FragmentTabAdapter.TAB_HOME_QA)
     )
 
     override fun onCreateView(
@@ -43,7 +36,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>(R.layout.fragment_home
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        fragmentAdapter = HomeFragmentAdapter(fragmentList, this.childFragmentManager, lifecycle)
+        fragmentAdapter = FragmentTabAdapter(fragmentList, this.childFragmentManager, lifecycle)
         binding.homeViewPager2.adapter = fragmentAdapter
         TabLayoutMediator(
             binding.tabLayout,
