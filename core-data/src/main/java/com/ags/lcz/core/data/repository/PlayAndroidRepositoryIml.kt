@@ -42,7 +42,44 @@ class PlayAndroidRepositoryIml @Inject constructor(
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ) = flow {
-        val response = playAndroidDexClient.getHomeArticleInfo(pageNo, pageSize)
+        val response = playAndroidDexClient.getHomeArticlePageList(pageNo, pageSize)
+        response.suspendOnSuccess {
+            emit(data.data)
+        }.onFailure {
+            onError { message() }
+        }
+    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+
+    override fun getHomeArticleTopList(
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<HomeArticleEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getHomeSquarePageList(
+        pageNo: Int,
+        pageSize: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ) = flow {
+        val response = playAndroidDexClient.getHomeSquarePageList(pageNo, pageSize)
+        response.suspendOnSuccess {
+            emit(data.data)
+        }.onFailure {
+            onError { message() }
+        }
+    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+
+    override fun getHomeAnswerPageList(
+        pageNo: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ) = flow {
+        val response = playAndroidDexClient.getHomeAnswerPageList(pageNo)
         response.suspendOnSuccess {
             emit(data.data)
         }.onFailure {

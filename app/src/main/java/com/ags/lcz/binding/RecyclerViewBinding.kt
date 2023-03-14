@@ -19,6 +19,8 @@ package com.ags.lcz.binding
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ags.lcz.ui.home.child.HomeChildViewModel
+import com.ags.lcz.ui.home.child.HomeQAViewModel
+import com.ags.lcz.ui.home.child.HomeSquareViewModel
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 import com.skydoves.bindables.BindingListAdapter
 import com.skydoves.whatif.whatIfNotNullAs
@@ -48,6 +50,32 @@ object RecyclerViewBinding {
             recyclerView = view,
             isLoading = { viewModel.isLoading },
             loadMore = { viewModel.fetchNextArticleList() },
+            onLast = { false }
+        ).run {
+            threshold = 8
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("paginationArticleList")
+    fun paginationArticleList(view: RecyclerView, viewModel: HomeSquareViewModel) {
+        RecyclerViewPaginator(
+            recyclerView = view,
+            isLoading = { viewModel.isLoading },
+            loadMore = { viewModel.fetchNextSquareArticleList() },
+            onLast = { false }
+        ).run {
+            threshold = 8
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("paginationArticleList")
+    fun paginationArticleList(view: RecyclerView, viewModel: HomeQAViewModel) {
+        RecyclerViewPaginator(
+            recyclerView = view,
+            isLoading = { viewModel.isLoading },
+            loadMore = { viewModel.fetchNextAnswerArticleList() },
             onLast = { false }
         ).run {
             threshold = 8

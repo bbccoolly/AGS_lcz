@@ -21,11 +21,28 @@ interface PlayAndroidApiService {
     @GET("banner/json")
     suspend fun getHomeBannerInfo(): ApiResponse<PlayAndroidResponse<List<HomeBannerEntity>>>
 
-    // 首页文章列表
+    // 首页文章
     @GET("article/list/{pageNo}/json")
-    suspend fun getHomeArticleInfo(
+    suspend fun getHomeArticlePageList(
         @Path("pageNo") pageNo: Int,
         @Query("page_size") pageSize: Int
     ): ApiResponse<PlayAndroidResponse<HomeArticleEntity>>
 
+    //首页置顶文章
+    @GET("article/top/json")
+    suspend fun getHomeArticleTopList(): ApiResponse<PlayAndroidResponse<HomeArticleEntity>>
+
+
+    //广场文章
+    @GET("user_article/list/{pageNo}/json")
+    suspend fun getHomeSquarePageList(
+        @Path("pageNo") pageNo: Int,
+        @Query("page_size") pageSize: Int
+    ): ApiResponse<PlayAndroidResponse<HomeArticleEntity>>
+
+    //问答列表
+    @GET("wenda/list/{pageNo}/json")
+    suspend fun getHomeAnswerPageList(
+        @Path("pageNo") pageNo: Int
+    ): ApiResponse<PlayAndroidResponse<HomeArticleEntity>>
 }

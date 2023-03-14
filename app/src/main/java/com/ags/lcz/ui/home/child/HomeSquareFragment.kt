@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.ags.lcz.R
+import com.ags.lcz.adapter.HomeArticleAdapter
 import com.ags.lcz.core.model.playandroid.TabEntity
 import com.ags.lcz.databinding.FragmentHomeSquareBinding
 import com.ags.lcz.ui.home.HomeFragment
@@ -36,6 +37,7 @@ class HomeSquareFragment :
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         return binding {
+            adapter = HomeArticleAdapter()
             vm = viewModel
         }.root
     }

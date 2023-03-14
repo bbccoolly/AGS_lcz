@@ -28,4 +28,28 @@ interface PlayAndroidRepository {
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ): Flow<HomeArticleEntity>
+
+    @WorkerThread
+    fun getHomeArticleTopList(
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<HomeArticleEntity>
+
+    @WorkerThread
+    fun getHomeSquarePageList(
+        pageNo: Int,
+        pageSize: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<HomeArticleEntity>
+
+    @WorkerThread
+    fun getHomeAnswerPageList(
+        pageNo: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ): Flow<HomeArticleEntity>
 }

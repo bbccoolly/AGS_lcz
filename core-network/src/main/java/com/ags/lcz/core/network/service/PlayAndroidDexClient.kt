@@ -18,9 +18,23 @@ class PlayAndroidDexClient @Inject constructor(
     suspend fun getHomeBannerInfo(): ApiResponse<PlayAndroidResponse<List<HomeBannerEntity>>> =
         playAndroidApiService.getHomeBannerInfo()
 
-    suspend fun getHomeArticleInfo(
+    suspend fun getHomeArticlePageList(
         pageNo: Int,
         pageSize: Int
     ): ApiResponse<PlayAndroidResponse<HomeArticleEntity>> =
-        playAndroidApiService.getHomeArticleInfo(pageNo = pageNo, pageSize = pageSize)
+        playAndroidApiService.getHomeArticlePageList(pageNo = pageNo, pageSize = pageSize)
+
+    suspend fun getHomeArticleTopList(): ApiResponse<PlayAndroidResponse<HomeArticleEntity>> =
+        playAndroidApiService.getHomeArticleTopList()
+
+    suspend fun getHomeSquarePageList(
+        pageNo: Int,
+        pageSize: Int
+    ): ApiResponse<PlayAndroidResponse<HomeArticleEntity>> =
+        playAndroidApiService.getHomeSquarePageList(pageNo = pageNo, pageSize = pageSize)
+
+    suspend fun getHomeAnswerPageList(
+        pageNo: Int
+    ): ApiResponse<PlayAndroidResponse<HomeArticleEntity>> =
+        playAndroidApiService.getHomeAnswerPageList(pageNo = pageNo)
 }
